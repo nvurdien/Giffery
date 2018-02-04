@@ -9,7 +9,7 @@ import random
 app = Flask(__name__)
 
 @app.route("/")
-def route():
+def homepage():
     return render_template('index.html', searchgif="", input_text="")
 
 @app.route("/", methods=["POST"])
@@ -113,4 +113,4 @@ def tag_words(text):
     return nltk.pos_tag(words)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=True)
