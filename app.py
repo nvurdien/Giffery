@@ -21,6 +21,7 @@ def get_url(text):
     api = "http://api.giphy.com/v1/gifs/search?"
     api_key = "&api_key=Jj9EUV1Uh1MxAgnRgveju7TEC2JCIYn3"
     limit = "&limit=5"
+
     f = open('dialogue_act_model.pickle', 'rb')
     dialogue_act_model = pickle.load(f)
     f.close()
@@ -43,21 +44,18 @@ def get_url(text):
             "Clarify": create_other_query
             }
 
-    while True:
-        query = "q="
-        text = dialogue_acts[dialogue_act_model.classify(dialogue_act_features(text))](text)
-        query += text.replace(" ", "+")
-        results = json.loads(urllib.urlopen(api + query + api_key + limit).read())
-        if len(results["data"]) > 5:
-            list_index = random.randint(0, 4)
-        elif len(results["data"]) > 0:
-            list_index = random.randint(0, len(results["data"]) - 1)
-        else:
-            print("Error! Word doesn't exist!")
-            continue
-        img = results["data"][list_index]["images"]["downsized_medium"]["url"]
-        return img
-        print()
+    query = "q="
+    text = dialogue_acts[dialogue_act_model.classify(dialogue_act_features(text))](text)
+    query += text.replace(" ", "+")
+    results = json.loads(urllib.urlopen(api + query + api_key + limit).read())
+
+    if len(results["data"]) > 5:
+        list_index = random.randint(0, 4)
+    elif len(results["data"]) > 0:
+        list_index = random.randint(0, len(results["data"]) - 1)
+    else:
+        return "https://media.giphy.com/media/xuDHhHcCR0rew/giphy.gif"
+    return results["data"][list_index]["images"]["downsized_medium"]["url"]
 
 def create_question_query(text):
     tagged_words = tag_words(text)
@@ -65,7 +63,6 @@ def create_question_query(text):
     for tag in tagged_words:
         if tag[1][0] == 'N':
             nouns += tag[0] + " "
-
     if nouns:
         nouns = nouns[:-1]
         return nouns
