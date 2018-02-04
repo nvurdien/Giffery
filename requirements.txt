@@ -1,5 +1,4 @@
 Flask
-pickle
 textblob
 json
 random
