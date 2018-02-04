@@ -10,12 +10,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def route():
-    return render_template('login.html', searchgif="", input_text="")
+    return render_template('index.html', searchgif="", input_text="")
 
 @app.route("/", methods=["POST"])
 def text():
     processed_text = get_url(request.form['text'])
-    return render_template("login.html", searchgif=processed_text, input_text=request.form['text'].replace('%20', ' '))
+    return render_template("index.html", searchgif=processed_text, input_text=request.form['text'].replace('%20', ' '))
 
 def get_url(text):
     api = "http://api.giphy.com/v1/gifs/search?"
