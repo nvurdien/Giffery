@@ -47,7 +47,7 @@ def get_url(text):
     query = "q="
     text = dialogue_acts[dialogue_act_model.classify(dialogue_act_features(text))](text)
     query += text.replace(" ", "+")
-    results = json.loads(urllib.urlopen(api + query + api_key + limit).read())
+    results = json.loads(urllib.urlopen(api + query + api_key + limit).read().decode('utf-8'))
 
     if len(results["data"]) > 5:
         list_index = random.randint(0, 4)
