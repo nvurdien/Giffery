@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/css/uikit.min.css" />
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit-icons.min.js"></script>
+        <style>
+            .uk-background-secondary{
+                background-color: cornflowerblue;
+            }
+        </style>
+    </head>
+    <!--Titlecard!-->
+    <div style="background-image: url('https://media.giphy.com/media/Lb4IZLmCfALhm/giphy.gif'); background-position: top;" class="uk-background-blend-multiply uk-background-secondary uk-background-cover uk-height-viewport uk-panel ">
+        <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+    <!--User input-->
+    <form id="form" class="uk-form-stacked uk-text-center uk-child-width-1-1" method="POST" action="/" uk-grid="">
+        <h1 class="uk-article-title"><span style="color:red;">G</span><span style="color:orange;">i</span><span style="color:yellow;">f</span><span style="color:darkgreen;">f</span><span style="color:aqua;">r</span><span style="color:purple;">e</span><span style="color:red;">y</span></h1>
+        <div class="uk-margin uk-grid-collapse uk-flex uk-flex-center" uk-grid>
+            <div>
+                <input name="text" class="uk-input uk-dark uk-form-width-medium" placeholder = "Say anything!!" type="text" {% if input_text %} value="{{input_text}}" {% endif %} id="userInput" required="" autocomplete="off">
+            </div>
+            <div>
+                <input style="background-color: black; color:white;" class="uk-button uk-button-secondary" type="submit">
+            </div>
+        </div>
+        <div>
+        {% if searchgif %}
+            <img src={{searchgif}}>
+        {% endif %}
+        </div>
+        </div>
+    </form>
+        
+    </div>
+    <!--For luls-->
+        <!--img src="https://78.media.tumblr.com/a8b6af83fe5381e4f4d61c3b4a5f3e92/tumblr_okzlstbbxk1rvxid3o1_500.gif"-->
+        
+</html>
